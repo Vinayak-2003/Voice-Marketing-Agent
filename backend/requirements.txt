@@ -1,0 +1,14 @@
+# Application Framework
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic-settings
+
+# Database
+sqlalchemy
+psycopg2-binary
+
+# Top-Level AI Libraries
+ollama
+faster-whisper
+TTS

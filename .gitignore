@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.eggs/
+
+# Environment
+.env
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Frontend (if you add one later)
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.DS_Store
+
+# IDE / Editor specific
+.vscode/
+.idea/
+*.swp
