@@ -11,9 +11,9 @@
   <br />
   <a href="#-getting-started-in-under-5-minutes"><strong>🚀 Get Started</strong></a>
   ·
-  <a href="https://github.com/your-username/voice-marketing-agents/issues"><strong>🐛 Report a Bug</strong></a>
+  <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues"><strong>🐛 Report a Bug</strong></a>
   ·
-  <a href="https://github.com/your-username/voice-marketing-agents/issues"><strong>✨ Request a Feature</strong></a>
+  <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues"><strong>✨ Request a Feature</strong></a>
 </p>
 
 <p align="center">
