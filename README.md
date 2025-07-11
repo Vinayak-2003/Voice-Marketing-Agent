@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="URL_TO_YOUR_LOGO_IMAGE" alt="Voice Marketing Agents Logo" width="200"/>
+  <img src="https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/docs/logo.png" alt="Voice Marketing Agents Logo" width="200"/>
 </p>
 
 <h1 align="center">Voice Marketing Agents 🤖</h1>
