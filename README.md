@@ -48,7 +48,7 @@ This project provides a complete, end-to-end, open-source solution for anyone to
 
 The platform is designed as a set of coordinated microservices, orchestrated by Docker Compose. This modular architecture allows for scalability, maintainability, and clear separation of concerns.
 
-![Voice Marketing Agents Architecture Diagram](URL_TO_YOUR_ARCHITECTURE_DIAGRAM)
+![Voice Marketing Agents Architecture Diagram](https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/docs/Architecture-1.png)
 
 <details>
   <summary><strong>Click to expand the detailed call processing workflow</strong></summary>
