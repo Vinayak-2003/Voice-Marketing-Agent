@@ -17,9 +17,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/your-username/voice-marketing-agents/stargazers"><img src="https://img.shields.io/github/stars/your-username/voice-marketing-agents?style=for-the-badge&logo=github&color=FFDD00" alt="Stars"></a>
-  <a href="https://github.com/your-username/voice-marketing-agents/blob/main/LICENSE"><img src="https://img.shields.io/github/license/your-username/voice-marketing-agents?style=for-the-badge&color=00BFFF" alt="License"></a>
-  <a href="https://github.com/your-username/voice-marketing-agents/forks"><img src="https://img.shields.io/github/forks/your-username/voice-marketing-agents?style=for-the-badge&logo=github&color=90EE90" alt="Forks"></a>
+  <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/stargazers"><img src="https://img.shields.io/github/stars/Hiteshydv001/Voice-Marketing-Agent?style=for-the-badge&logo=github&color=FFDD00" alt="Stars"></a>
+  <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Hiteshydv001/Voice-Marketing-Agent?style=for-the-badge&color=00BFFF" alt="License"></a>
+  <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/network/members"><img src="https://img.shields.io/github/forks/Hiteshydv001/Voice-Marketing-Agent?style=for-the-badge&logo=github&color=90EE90" alt="Forks"></a>
 </p>
 
 ---
