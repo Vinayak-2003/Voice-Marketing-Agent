@@ -232,6 +232,140 @@ This project is a solid foundation, but our vision is much bigger. Here’s a sn
 *   [ ] **Phase 3: Built for Scale**
     *   **Kubernetes & Helm Charts:** Production-grade deployment scripts for auto-scaling on the cloud.
     *   **Comprehensive Analytics Dashboard:** Visualize call success rates, conversation paths, and more.
+       
+
+# 💖 Contributing to Voice Marketing Agents
+
+First off, thank you for considering contributing! It’s people like you that make open-source such an amazing place. We are thrilled you're here.
+
+This project is community-driven, and we welcome contributions of all kinds: from code and documentation to bug reports and feature ideas. No contribution is too small.
+
+## 🚀 You Can Make Your First Contribution in 5 Minutes!
+
+Seriously. We believe that contributing to open source should be easy and rewarding. Here’s how you can make your first pull request (PR) right now and officially become a contributor.
+
+1.  **Find your favorite emoji!** 😄
+2.  Go to our [`README.md` file](https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/README.md).
+3.  Click the little **pencil icon** to edit the file directly on GitHub.
+4.  Scroll to the bottom of the file to the "Contributors" section.
+5.  Add your name and GitHub profile link to the list, along with your chosen emoji. Like this:
+    ```markdown
+    - [Your Name](https://github.com/your-username) ✨
+    ```
+6.  Scroll up and click the **"Commit changes"** button. Give your commit a nice message like "feat: Add myself to contributors list".
+7.  Follow the prompts to create a new pull request.
+
+**That's it!** We'll merge it, and you'll be on our contributors' list. Welcome to the team!
+
+---
+
+## 🛠️ How to Contribute Code (The Full Workflow)
+
+Ready to tackle a bug or build a new feature? Here’s the complete guide to setting up your environment and submitting your work.
+
+### Step 0: Find Something to Work On
+
+*   **Issues List:** Our project's to-do list lives in the [**Issues Tab**](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues). This is the best place to start.
+*   **Good First Issues:** We've tagged certain issues with the [`good first issue`](https://github.com/Hiteshydv001/Voice-Marketing-Agent/labels/good%20first%20issue) label. These are perfect for getting your feet wet with the codebase.
+*   **Claim an Issue:** To avoid duplicated effort, please comment on an issue to let us know you're working on it.
+*   **Have a New Idea?** Please **create a new issue** to discuss your idea before you start coding. This helps ensure your contribution aligns with the project's goals.
+
+### Step 1: Set Up Your Local Development Environment
+
+We've made this as simple as possible using Docker. You don't need to install Python, Node, or PostgreSQL on your machine. Just Docker.
+
+#### Prerequisites
+
+1.  **Git:** [Install Git](https://git-scm.com/)
+2.  **Docker & Docker Compose:** [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+#### Local Setup Commands
+
+1.  **Fork the repository:**
+    Click the "Fork" button at the top-right of the repository page. This creates a copy of the project under your own GitHub account.
+
+2.  **Clone your fork:**
+    ```sh
+    git clone https://github.com/YOUR_USERNAME/Voice-Marketing-Agent.git
+    cd Voice-Marketing-Agent
+    ```
+    *(Replace `YOUR_USERNAME` with your GitHub username.)*
+
+3.  **Create a new branch:**
+    Always work on a new branch, never on `main`. Name it something descriptive.
+    ```sh
+    # For a new feature:
+    git checkout -b feature/add-call-analytics
+    # For a bug fix:
+    git checkout -b fix/resolve-tts-latency-bug
+    ```
+
+4.  **Launch the application:**
+    This one command builds and runs the entire multi-service application.
+    ```sh
+    docker compose up --build -d
+    ```
+    *   The `--build` flag tells Docker to rebuild the images if you've changed code (like `requirements.txt`).
+    *   The `-d` flag runs it in the background.
+
+5.  **Download the LLM (one-time setup):**
+    The language model needs to be pulled into the running Ollama container.
+    ```sh
+    # Get the exact container name by running 'docker ps'
+    docker exec -it voice-marketing-agent-ollama-1 ollama pull tinylama
+    ```
+
+6.  **Verify your setup:**
+    *   **Frontend:** `http://localhost:3000`
+    *   **Backend API Docs:** `http://localhost:8000/docs`
+
+    If both pages load, your environment is ready!
+
+### Step 2: Make Your Changes
+
+Now for the fun part!
+
+*   **Backend Code:** The backend code is located in the `backend/` directory. When you save a Python file, FastAPI's reloader will automatically restart the server inside the Docker container. You can watch the logs with `docker logs -f voice-marketing-agent-backend-1`.
+*   **Frontend Code:** The frontend code is in the `frontend/` directory. When you save a `.jsx` or `.css` file, Vite's Hot Module Replacement (HMR) will update the UI in your browser instantly.
+
+### Step 3: Submit Your Pull Request
+
+Once you're happy with your changes:
+
+1.  **Commit your work:**
+    Use clear and descriptive commit messages.
+    ```sh
+    git add .
+    git commit -m "feat: Implement user authentication API endpoints"
+    ```
+
+2.  **Push to your fork:**
+    ```sh
+    git push origin your-branch-name
+    ```
+
+3.  **Open a Pull Request:**
+    Go to the original repository on GitHub. You'll see a banner prompting you to create a Pull Request from your new branch. Click it!
+
+4.  **Describe your PR:**
+    Fill out the Pull Request template. Explain **what** your PR does and **why** you made these changes. Link the issue it solves by writing "Closes #123" in the description.
+
+### Step 4: Code Review
+
+A maintainer will review your PR. We might suggest some changes or ask questions. This is a collaborative process to ensure the code quality remains high. Once approved, we will merge your code into the main branch.
+
+**🎉 Congratulations and thank you! You are officially a contributor to Voice Marketing Agents!**
+
+---
+
+## 📜 Code of Conduct
+
+To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.** Please read the full [Code of Conduct](CODE_OF_CONDUCT.md) before participating.
+
+---
+
+Thank you again for your interest. We can't wait to see what you build with us!
+
 
 ## 📜 License
 
