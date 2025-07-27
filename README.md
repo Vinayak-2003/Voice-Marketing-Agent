@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/docs/logo.png" alt="Voice Marketing Agents Logo" width="200"/>
 </p>
@@ -372,6 +371,4 @@ Thank you again for your interest. We can't wait to see what you build with us!
 This project is freely available under the **MIT License**. See the `LICENSE` file for more information.
 
 ---
-<p align="center">
-  Built with ❤️ and a lot of coffee for GSSoC '24. Let's give the world a better way to talk to machines.
-</p>
+<div align="center"> <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"> <p>Built with ❤️ and a lot of coffee for GSSoC '24. Let's give the world a better way to talk to machines.</p> <img src="https://komarev.com/ghpvc/?username=Hiteshydv001-Voice-Marketing-Agent&label=Project%20Views&color=00BFFF&style=flat" alt="Project views" /> </div> ```
