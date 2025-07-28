@@ -1,9 +1,16 @@
 # backend/src/api/routes/calls.py
+
 import os
 import uuid
+import traceback # Import for detailed error logging
 from fastapi import APIRouter, Depends, Form, File, UploadFile, HTTPException, Query
+from fastapi.responses import Response # Import Response for returning XML
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+
+# --- IMPORT TWILIO'S TwiML BUILDER ---
+from twilio.twiml.voice_response import VoiceResponse, Gather
+# -------------------------------------
 
 from ...core.database import get_db
 from ...services.llm_service import LLMService
@@ -20,17 +27,12 @@ stt_service = STTService()
 tts_service = TTSService()
 llm_service = LLMService()
 
-AUDIO_DIR = "/app/audio_files"
-os.makedirs(AUDIO_DIR, exist_ok=True)
-
-# This class defines the expected JSON format for the originate call request.
 class OriginateCallRequest(BaseModel):
     to_number: str
     agent_id: int
 
 @router.post("/originate")
 def originate_call(request: OriginateCallRequest, db: Session = Depends(get_db)):
-    # Check if the agent exists before starting the call
     db_agent = db.query(agent_model.Agent).filter(agent_model.Agent.id == request.agent_id).first()
     if not db_agent:
         raise HTTPException(status_code=404, detail=f"Agent with ID {request.agent_id} not found.")
@@ -47,36 +49,73 @@ def originate_call(request: OriginateCallRequest, db: Session = Depends(get_db))
         raise HTTPException(status_code=500, detail=f"Failed to initiate call. Error: {str(e)}")
 
 
-@router.post("/webhook")
+@router.post("/webhook", response_class=Response(media_type="application/xml"))
 async def call_webhook(
     db: Session = Depends(get_db),
-    agent_id: int = Query(...), 
-    call_sid: str = Form(...),
-    from_number: str = Form(...),
-    speech_result: UploadFile = File(None)
+    agent_id: int = Query(...),
+    # Twilio sends speech recognition results in the 'SpeechResult' field
+    SpeechResult: str = Form(None), 
+    # Twilio sends the Call SID with a capital 'S'
+    CallSid: str = Form(...) 
 ):
-    db_agent = db.query(agent_model.Agent).filter(agent_model.Agent.id == agent_id).first()
-    if not db_agent:
-        raise HTTPException(status_code=404, detail=f"Agent with ID {agent_id} not found for this call.")
+    """
+    Main webhook to handle call progression. Now returns proper TwiML.
+    """
+    print(f"--- WEBHOOK TRIGGERED for CallSid: {CallSid} ---")
+    response = VoiceResponse()
 
-    agent = AppointmentSetterAgent(llm_service=llm_service, system_prompt=db_agent.system_prompt)
-    
-    conversation_history = [] 
+    try:
+        db_agent = db.query(agent_model.Agent).filter(agent_model.Agent.id == agent_id).first()
+        if not db_agent:
+            print(f"❌ ERROR: Agent with ID {agent_id} not found in webhook.")
+            response.say("Sorry, an internal error occurred. Goodbye.")
+            response.hangup()
+            return Response(content=str(response), media_type="application/xml")
 
-    if speech_result is None:
-        greeting_text = agent.get_initial_greeting()
-        # NOTE: This response needs to be in proper TwiML format for Twilio to work.
-        # This is a conceptual response.
-        return f'<Response><Say>{greeting_text}</Say><Gather input="speech" action="/api/v1/calls/webhook?agent_id={agent_id}"/></Response>'
-    else:
-        user_audio_path = os.path.join(AUDIO_DIR, f"{call_sid}_{uuid.uuid4()}.wav")
-        with open(user_audio_path, "wb") as buffer:
-            buffer.write(await speech_result.read())
-
-        user_transcript = stt_service.transcribe(user_audio_path)
-        ai_response_text = agent.process_response(user_transcript, conversation_history)
+        agent = AppointmentSetterAgent(llm_service=llm_service, system_prompt=db_agent.system_prompt)
         
-        if "goodbye" in ai_response_text.lower():
-            return f'<Response><Say>{ai_response_text}</Say><Hangup/></Response>'
+        conversation_history = [] # In a real app, you'd store and retrieve this from the DB based on CallSid
+
+        if SpeechResult is None:
+            # This is the first webhook hit (user just answered)
+            print("🎙️ No speech result, generating initial greeting...")
+            greeting_text = agent.get_initial_greeting()
+            response.say(greeting_text)
+            
+            # Tell Twilio to listen for the user's response and call this webhook back
+            gather = Gather(input='speech', action=f'/api/v1/calls/webhook?agent_id={agent_id}', speechTimeout='auto')
+            response.append(gather)
+            print("✅ Responded with greeting and gather instruction.")
+
         else:
-            return f'<Response><Say>{ai_response_text}</Say><Gather input="speech" action="/api/v1/calls/webhook?agent_id={agent_id}"/></Response>'
+            # The user has spoken, and Twilio has transcribed it
+            user_transcript = SpeechResult
+            print(f"🎤 User said: '{user_transcript}'")
+
+            ai_response_text = agent.process_response(user_transcript, conversation_history)
+            print(f"🤖 AI will say: '{ai_response_text}'")
+
+            response.say(ai_response_text)
+            
+            if "goodbye" in ai_response_text.lower():
+                print("🏁 AI said goodbye, responding with Hangup.")
+                response.hangup()
+            else:
+                print("👂 Responding with Say and gathering next user input...")
+                gather = Gather(input='speech', action=f'/api/v1/calls/webhook?agent_id={agent_id}', speechTimeout='auto')
+                response.append(gather)
+
+        final_twiml = str(response)
+        print(f"➡️  Responding to Twilio with TwiML:\n{final_twiml}")
+        return Response(content=final_twiml, media_type="application/xml")
+
+    except Exception as e:
+        print(f"🔥🔥🔥 UNEXPECTED ERROR IN WEBHOOK 🔥🔥🔥")
+        print(f"Error: {e}")
+        traceback.print_exc()
+        
+        # Respond with a safe error message to Twilio
+        error_response = VoiceResponse()
+        error_response.say("I'm sorry, an unexpected error has occurred. Goodbye.")
+        error_response.hangup()
+        return Response(content=str(error_response), media_type="application/xml")
