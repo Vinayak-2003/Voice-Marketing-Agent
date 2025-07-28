@@ -1,108 +1,82 @@
 # backend/src/api/routes/calls.py
 import os
 import uuid
-from fastapi import APIRouter, Depends, Form, HTTPException, Response
+from fastapi import APIRouter, Depends, Form, File, UploadFile, HTTPException, Query
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from twilio.rest import Client
-from twilio.twiml.voice_response import VoiceResponse, Gather
 
 from ...core.database import get_db
-from ...core.config import settings
 from ...services.llm_service import LLMService
 from ...services.stt_service import STTService
 from ...services.tts_service import TTSService
+from ...services.telephony_service import twilio_service
 from ...agents.appointment_setter.logic import AppointmentSetterAgent
 from ...models import agent as agent_model
 
 router = APIRouter()
 
+# Service Initialization
 stt_service = STTService()
 tts_service = TTSService()
 llm_service = LLMService()
+
+AUDIO_DIR = "/app/audio_files"
+os.makedirs(AUDIO_DIR, exist_ok=True)
+
+# This class defines the expected JSON format for the originate call request.
+class OriginateCallRequest(BaseModel):
+    to_number: str
+    agent_id: int
+
+@router.post("/originate")
+def originate_call(request: OriginateCallRequest, db: Session = Depends(get_db)):
+    # Check if the agent exists before starting the call
+    db_agent = db.query(agent_model.Agent).filter(agent_model.Agent.id == request.agent_id).first()
+    if not db_agent:
+        raise HTTPException(status_code=404, detail=f"Agent with ID {request.agent_id} not found.")
+
+    try:
+        result = twilio_service.originate_call(
+            to_number=request.to_number,
+            agent_id=request.agent_id
+        )
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to initiate call. Error: {str(e)}")
 
 
 @router.post("/webhook")
 async def call_webhook(
     db: Session = Depends(get_db),
-    agent_id: int = Form(1),
-    SpeechResult: str = Form(None),
+    agent_id: int = Query(...), 
+    call_sid: str = Form(...),
+    from_number: str = Form(...),
+    speech_result: UploadFile = File(None)
 ):
-    # --- DYNAMIC AGENT LOADING ---
     db_agent = db.query(agent_model.Agent).filter(agent_model.Agent.id == agent_id).first()
     if not db_agent:
-        raise HTTPException(status_code=404, detail=f"Agent with ID {agent_id} not found.")
-    agent = AppointmentSetterAgent(llm_service, system_prompt=db_agent.system_prompt)
+        raise HTTPException(status_code=404, detail=f"Agent with ID {agent_id} not found for this call.")
 
-    # --- TwiML RESPONSE GENERATION ---
-    response = VoiceResponse()
-    public_url = os.environ.get('PUBLIC_URL')
-    if not public_url:
-        raise HTTPException(status_code=500, detail="PUBLIC_URL environment variable is not set.")
+    agent = AppointmentSetterAgent(llm_service=llm_service, system_prompt=db_agent.system_prompt)
+    
+    conversation_history = [] 
 
-    if SpeechResult is None:
-        # First leg of the call, play the initial greeting
-        text_to_speak = agent.get_initial_greeting()
+    if speech_result is None:
+        greeting_text = agent.get_initial_greeting()
+        # NOTE: This response needs to be in proper TwiML format for Twilio to work.
+        # This is a conceptual response.
+        return f'<Response><Say>{greeting_text}</Say><Gather input="speech" action="/api/v1/calls/webhook?agent_id={agent_id}"/></Response>'
     else:
-        # The user has spoken, process their response
-        user_transcript = SpeechResult
-        print(f"User said: {user_transcript}")
-        # Get the AI's next response
-        text_to_speak = agent.process_response(user_transcript, conversation_history=[])
-        print(f"AI will say: {text_to_speak}")
+        user_audio_path = os.path.join(AUDIO_DIR, f"{call_sid}_{uuid.uuid4()}.wav")
+        with open(user_audio_path, "wb") as buffer:
+            buffer.write(await speech_result.read())
 
-    # Synthesize the text to an audio file
-    filename = f"{uuid.uuid4()}.wav"
-    audio_file_path = os.path.join(settings.AUDIO_DIR, filename)
-    tts_service.synthesize(text_to_speak, audio_file_path)
-
-    # Construct the public URL for the audio file
-    public_audio_url = f"{public_url}/audio/{filename}"
-
-    # Tell Twilio to play the audio file
-    response.play(public_audio_url)
-
-    # After playing, listen for the user's next response and send it back to this same webhook
-    gather = Gather(input='speech', action=f'/api/v1/calls/webhook?agent_id={agent_id}', speech_timeout='auto', method='POST')
-    response.append(gather)
-
-    return Response(content=str(response), media_type="application/xml")
-
-
-# --- Endpoint to Start a Call ---
-
-class OriginateCallRequest(BaseModel):
-    phone_number: str
-    agent_id: int
-
-@router.post("/originate")
-async def originate_call(request: OriginateCallRequest):
-    """
-    Receives a request from the frontend and uses Twilio to start a real outbound call.
-    """
-    print(f"Received request to start a REAL call to: {request.phone_number} with Agent ID: {request.agent_id}")
-
-    account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-    auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
-    twilio_phone_number = os.environ.get('TWILIO_PHONE_NUMBER')
-    public_url = os.environ.get('PUBLIC_URL')
-
-    if not all([account_sid, auth_token, twilio_phone_number, public_url]):
-        raise HTTPException(status_code=500, detail="Server is not configured for making calls. TWILIO environment variables are missing.")
-
-    client = Client(account_sid, auth_token)
-
-    try:
-        webhook_url_with_agent = f"{public_url}/api/v1/calls/webhook?agent_id={request.agent_id}"
+        user_transcript = stt_service.transcribe(user_audio_path)
+        ai_response_text = agent.process_response(user_transcript, conversation_history)
         
-        call = client.calls.create(
-            to=request.phone_number,
-            from_=twilio_phone_number,
-            url=webhook_url_with_agent,
-            method='POST'  # <-- THIS IS THE CRUCIAL FIX
-        )
-        print(f"Call successfully initiated with SID: {call.sid}")
-        return {"status": "success", "message": f"Successfully initiated call to {request.phone_number}.", "call_sid": call.sid}
-    except Exception as e:
-        print(f"Error initiating call with Twilio: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        if "goodbye" in ai_response_text.lower():
+            return f'<Response><Say>{ai_response_text}</Say><Hangup/></Response>'
+        else:
+            return f'<Response><Say>{ai_response_text}</Say><Gather input="speech" action="/api/v1/calls/webhook?agent_id={agent_id}"/></Response>'

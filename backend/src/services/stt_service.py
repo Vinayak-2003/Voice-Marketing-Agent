@@ -7,7 +7,10 @@ class STTService:
 
     def __init__(self):
         try:
-            model_size = settings.FASTER_WHISPER_MODEL_SIZE
+            # --- THIS IS THE LINE TO FIX ---
+            model_size = settings.FASTER_WHISPER_MODEL_SIZE # Changed from WHISPER_MODEL_SIZE
+            # -------------------------------
+            
             compute_type = settings.FASTER_WHISPER_COMPUTE_TYPE
             
             print(f"Initializing Faster-Whisper with model: {model_size}")
@@ -27,16 +30,14 @@ class STTService:
     def transcribe(self, audio_file_path: str) -> str:
         """Transcribes audio from a file path."""
         try:
-            # The transcribe method returns an iterator of segment objects
             segments, info = self.model.transcribe(audio_file_path, beam_size=5)
             
             print(f"Detected language '{info.language}' with probability {info.language_probability}")
 
-            # Concatenate the text from all segments
             full_transcript = "".join(segment.text for segment in segments)
             
             return full_transcript.strip()
             
         except Exception as e:
             print(f"Error during transcription with Faster-Whisper: {e}")
-            return "" # Return empty string on error
+            return ""

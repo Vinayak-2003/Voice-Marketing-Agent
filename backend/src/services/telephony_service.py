@@ -1,30 +1,61 @@
 # backend/src/services/telephony_service.py
-# This is a CONCEPTUAL file to illustrate the kinds of actions
-# a voice application needs to perform. The `calls.py` router
-# implements this logic directly for simplicity.
+from twilio.rest import Client
+from ..core.config import settings
 
-class TelephonyActionBuilder:
-    """
-    A helper class to build structured responses for a telephony platform like Asterisk or FreeSWITCH.
-    """
+class TwilioService:
+    _client = None
 
-    @staticmethod
-    def play_audio(file_url: str):
-        """Instruction to play an audio file."""
-        return {"action": "play", "url": file_url}
+    @classmethod
+    def get_client(cls):
+        """
+        Returns a singleton instance of the Twilio client.
+        Initializes the client on first call and validates credentials.
+        """
+        if cls._client is None:
+            # Check if the environment variables are loaded and not empty
+            if not all([
+                settings.TWILIO_ACCOUNT_SID,
+                settings.TWILIO_AUTH_TOKEN,
+                settings.TWILIO_PHONE_NUMBER
+            ]):
+                raise ValueError("Server is not configured for making calls. TWILIO environment variables are missing or empty.")
+            
+            try:
+                print("Initializing Twilio client...")
+                cls._client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                print("✅ Twilio client initialized successfully.")
+            except Exception as e:
+                print(f"❌ Failed to initialize Twilio client: {e}")
+                raise ConnectionError(f"Failed to initialize Twilio client. Check credentials. Error: {e}")
+        
+        return cls._client
 
-    @staticmethod
-    def gather_speech(timeout: int = 5, end_on_silence_ms: int = 2000):
-        """Instruction to listen for the user to speak."""
-        return {
-            "action": "gather",
-            "params": {
-                "timeout": timeout,
-                "end_on_silence": f"{end_on_silence_ms}ms"
-            }
-        }
+    def originate_call(self, to_number: str, agent_id: int):
+        """
+        Originates a new call using Twilio.
+        """
+        client = self.get_client()
+        
+        # IMPORTANT: For Twilio webhooks to work, your server must be publicly accessible.
+        # During local development, you must use a tool like ngrok to expose your localhost:8000.
+        # Replace 'http://your_ngrok_or_public_url.io' with your actual ngrok URL.
+        public_url = settings.PUBLIC_URL 
+        
+        try:
+            print(f"Attempting to call {to_number} from {settings.TWILIO_PHONE_NUMBER}...")
+            call = client.calls.create(
+                to=to_number,
+                from_=settings.TWILIO_PHONE_NUMBER,
+                # This is the URL Twilio will call back to our webhook when the user answers.
+                url=f"{public_url}/api/v1/calls/webhook?agent_id={agent_id}"
+            )
+            print(f"Successfully initiated call with SID: {call.sid}")
+            return {"status": "success", "call_sid": call.sid}
+        except Exception as e:
+            print(f"❌ Twilio call creation failed: {e}")
+            # This will cause a 500 error, but the log will show the *real* reason
+            # from Twilio (e.g., "The 'To' number is not a valid phone number").
+            raise e
 
-    @staticmethod
-    def hangup():
-        """Instruction to end the call."""
-        return {"action": "hangup"}
+# Create a single instance of the service to be imported elsewhere
+twilio_service = TwilioService()

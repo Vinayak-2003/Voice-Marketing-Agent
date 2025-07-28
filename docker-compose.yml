@@ -1,11 +1,9 @@
 # docker-compose.yml
 
-version: '3.8'
-
 services:
-  backend:
+  api:
     build: ./backend
-    container_name: voicegenie_backend
+    container_name: voice-marketing-agent-backend
     ports:
       - "8000:8000"
     volumes:
@@ -13,32 +11,32 @@ services:
       - shared_audio:/app/audio_files
     env_file:
       - .env
-    depends_on:
-      - db
-      - ollama
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
-    # --- ADD THIS ENTIRE HEALTHCHECK BLOCK ---
+    depends_on:
+      # The API now only explicitly waits for the database.
+      # It will wait for Ollama in its own code.
+      db:
+        condition: service_healthy
     healthcheck:
-      # This command checks if the backend's root URL is responding.
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
-      interval: 30s         # How often to run the check
-      timeout: 10s          # How long to wait for a response
-      retries: 5            # How many times to retry before failing
-      start_period: 180s    # Grace period for the container to start up and load models
+      # This healthcheck is still good. It tells us when the whole app is ready.
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 300s # Keep this generous for model downloads
 
-  frontend:
+  dashboard:
     build: ./frontend
-    container_name: voicegenie_frontend
+    container_name: voice-marketing-agent-frontend
     ports:
       - "3000:80"
-    # --- MODIFY THIS depends_on BLOCK ---
     depends_on:
-      backend:
-        condition: service_healthy # This makes the frontend wait until the backend is fully ready
+      api:
+        condition: service_healthy
 
   db:
     image: postgres:15-alpine
-    container_name: voicegenie_db
+    container_name: voice-marketing-agent-db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
@@ -53,11 +51,13 @@ services:
 
   ollama:
     image: ollama/ollama
-    container_name: voicegenie_ollama
+    container_name: voice-marketing-agent-ollama
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    # --- WE HAVE REMOVED THE HEALTHCHECK FROM OLLAMA ENTIRELY ---
+    # Our Python backend is now responsible for waiting for it.
 
 volumes:
   postgres_data:

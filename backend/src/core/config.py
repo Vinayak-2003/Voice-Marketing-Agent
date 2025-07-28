@@ -1,6 +1,5 @@
 # backend/src/core/config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import os
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding='utf-8')
@@ -11,18 +10,20 @@ class Settings(BaseSettings):
     # AI Services
     OLLAMA_HOST: str
     LLM_MODEL_NAME: str
-    WHISPER_MODEL_SIZE: str
+    FASTER_WHISPER_MODEL_SIZE: str
+    FASTER_WHISPER_COMPUTE_TYPE: str
     TTS_MODEL_NAME: str
 
+    # Telephony (Twilio)
+    TWILIO_ACCOUNT_SID: str
+    TWILIO_AUTH_TOKEN: str
+    TWILIO_PHONE_NUMBER: str
+    
     # App
     SECRET_KEY: str
-    
-    # --- NEW: Shared directory path ---
-    AUDIO_DIR: str = "/app/audio_files"
+    AUDIO_DIR: str
+    # --- ADD THIS LINE ---
+    PUBLIC_URL: str
+    # ---------------------
 
-
-# Create a single instance of the settings to be imported by other modules
 settings = Settings()
-
-# Ensure the audio directory exists
-os.makedirs(settings.AUDIO_DIR, exist_ok=True)
