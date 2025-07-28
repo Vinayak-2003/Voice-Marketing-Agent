@@ -175,7 +175,7 @@ No complex setup, no dependency hell. Just Docker and Git.
 Ready to jump in? Here’s how to submit a code contribution.
 
 1.  **Find an Issue:**
-    *   Start by looking at our [open issues](https://github.com/your-username/voice-marketing-agents/issues). Look for ones tagged `good first issue` - these are perfect for new contributors.
+    *   Start by looking at our [open issues](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues). Look for ones tagged `good first issue` - these are perfect for new contributors.
     *   If you have a new idea, **create a new issue first** to discuss it with the maintainers. This ensures your hard work aligns with the project's goals.
     *   **Claim an issue** by commenting on it, so everyone knows you're working on it.
 
@@ -183,8 +183,8 @@ Ready to jump in? Here’s how to submit a code contribution.
     *   **Fork** the repository to your own GitHub account.
     *   **Clone** your fork to your local machine:
         ```sh
-        git clone https://github.com/YOUR_USERNAME/voice-marketing-agents.git
-        cd voice-marketing-agents
+        git clone https://github.com/OpenVoiceX/voice-marketing-agent.git
+        cd voice-marketing-agent
         ```
     *   Create a **new branch** for your feature or bug fix. Use a descriptive name:
         ```sh
@@ -204,7 +204,7 @@ Ready to jump in? Here’s how to submit a code contribution.
         ```sh
         git push origin feature/add-campaign-management
         ```
-    *   Go to the original `voice-marketing-agents` repository on GitHub. You'll see a prompt to create a Pull Request from your new branch.
+    *   Go to the original `voice-marketing-agent` repository on GitHub. You'll see a prompt to create a Pull Request from your new branch.
     *   **Create the Pull Request.** Fill out the PR template. Be sure to link the issue it resolves (e.g., "Closes #123"). This helps us track everything.
 
 5.  **Code Review:**
@@ -264,8 +264,8 @@ Ready to tackle a bug or build a new feature? Here’s the complete guide to set
 
 ### Step 0: Find Something to Work On
 
-*   **Issues List:** Our project's to-do list lives in the [**Issues Tab**](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues). This is the best place to start.
-*   **Good First Issues:** We've tagged certain issues with the [`good first issue`](https://github.com/Hiteshydv001/Voice-Marketing-Agent/labels/good%20first%20issue) label. These are perfect for getting your feet wet with the codebase.
+*   **Issues List:** Our project's to-do list lives in the [**Issues Tab**](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues). This is the best place to start.
+*   **Good First Issues:** We've tagged certain issues with the [`good first issue`](https://github.com/OpenVoiceX/Voice-Marketing-Agent/labels/good%20first%20issue) label. These are perfect for getting your feet wet with the codebase.
 *   **Claim an Issue:** To avoid duplicated effort, please comment on an issue to let us know you're working on it.
 *   **Have a New Idea?** Please **create a new issue** to discuss your idea before you start coding. This helps ensure your contribution aligns with the project's goals.
 
@@ -359,7 +359,7 @@ A maintainer will review your PR. We might suggest some changes or ask questions
 
 ## 📜 Code of Conduct
 
-To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.** Please read the full [Code of Conduct](CODE_OF_CONDUCT.md) before participating.
+To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.** Please read the full [Code of Conduct](https://github.com/OpenVoiceX/Voice-Marketing-Agent?tab=coc-ov-file) before participating.
 
 ---
 
@@ -368,7 +368,7 @@ Thank you again for your interest. We can't wait to see what you build with us!
 
 ## 📜 License
 
-This project is freely available under the **MIT License**. See the `LICENSE` file for more information.
+This project is freely available under the **MIT License**. See the `LICENSE` file for more information. <!-- This will be updated as PR is merged -->
 
 ---
-<div align="center"> <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"> <p>Built with ❤️ and a lot of coffee for GSSoC '24. Let's give the world a better way to talk to machines.</p> <img src="https://komarev.com/ghpvc/?username=Hiteshydv001-Voice-Marketing-Agent&label=Project%20Views&color=00BFFF&style=flat" alt="Project views" /> </div> ```
+<div align="center"> <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"> <p>Built with ❤️ and a lot of coffee for GSSoC'25. Let's give the world a better way to talk to machines.</p> <img src="https://komarev.com/ghpvc/?username=Hiteshydv001-Voice-Marketing-Agent&label=Project%20Views&color=00BFFF&style=flat" alt="Project views" /> </div> ```
