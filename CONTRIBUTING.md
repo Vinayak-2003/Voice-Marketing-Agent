@@ -9,7 +9,7 @@ This project is community-driven, and we welcome contributions of all kinds: fro
 Seriously. We believe that contributing to open source should be easy and rewarding. Here's how you can make your first pull request (PR) right now and officially become a contributor:
 
 1. **Find your favorite emoji!** 😄
-2. Go to our [`README.md` file](https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/README.md)
+2. Go to our [`README.md` file](https://github.com/OpenVoiceX/Voice-Marketing-Agent/blob/main/README.md)
 3. Click the little **pencil icon** to edit the file directly on GitHub
 4. Scroll to the bottom of the file to the "Contributors" section
 5. Add your name and GitHub profile link to the list, along with your chosen emoji:
@@ -99,8 +99,8 @@ We've made this as simple as possible using Docker. You don't need to install Py
 
 ### Step 1: Find Something to Work On
 
-- **Issues List:** Check our [Issues Tab](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues) for the project's to-do list
-- **Good First Issues:** Look for issues tagged with [`good first issue`](https://github.com/Hiteshydv001/Voice-Marketing-Agent/labels/good%20first%20issue) - perfect for getting started
+- **Issues List:** Check our [Issues Tab](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues) for the project's to-do list
+- **Good First Issues:** Look for issues tagged with [`good first issue`](https://github.com/OpenVoiceX/Voice-Marketing-Agent/labels/good%20first%20issue) - perfect for getting started
 - **Claim an Issue:** Comment on an issue to let us know you're working on it
 - **Have a New Idea?** Please create a new issue to discuss your idea before starting to code
 
@@ -162,11 +162,11 @@ This is a collaborative process to maintain code quality. Once approved, we'll m
 Found a bug? Please help us fix it by creating a detailed bug report.
 
 ### Before Submitting a Bug Report
-- Check if the bug has already been reported in our [Issues](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues)
+- Check if the bug has already been reported in our [Issues](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues)
 - Try to reproduce the bug with the latest version
 
 ### How to Submit a Bug Report
-1. Open a [new issue](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues/new)
+1. Open a [new issue](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues/new)
 2. Use a clear and descriptive title
 3. Include:
    - Steps to reproduce the bug
@@ -187,7 +187,7 @@ Have an idea for a new feature? We'd love to hear it!
 - Consider if it aligns with the project's goals
 
 ### How to Suggest a Feature
-1. Open a [new issue](https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues/new)
+1. Open a [new issue](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues/new)
 2. Use the title format: "Feature Request: [Your Feature Name]"
 3. Include:
    - Clear description of the feature
@@ -288,7 +288,7 @@ Need help or have questions? Here are the best ways to reach us:
 
 To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.**
 
-Please read our full [Code of Conduct](https://github.com/Hiteshydv001/Voice-Marketing-Agent?tab=coc-ov-file) before participating.
+Please read our full [Code of Conduct](https://github.com/OpenVoiceX/Voice-Marketing-Agent/blob/main/CODE_OF_CONDUCT.md) before participating.
 
 ---
 
