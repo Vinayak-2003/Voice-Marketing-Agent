@@ -43,6 +43,12 @@ This project provides a complete, end-to-end, open-source solution for anyone to
 
 ---
 
+## Ui Design
+
+![Voice Marketing Agents Architecture Diagram](https://github.com/OpenVoiceX/Voice-Marketing-Agent/blob/main/docs/Voice-marketing-agent.png)
+
+---
+
 ## 🏗️ System Architecture: A Deep Dive
 
 The platform is designed as a set of coordinated microservices, orchestrated by Docker Compose. This modular architecture allows for scalability, maintainability, and clear separation of concerns.
