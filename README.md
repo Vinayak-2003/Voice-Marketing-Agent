@@ -8,7 +8,7 @@
   <strong>An open-source framework to build and deploy intelligent, self-hosted AI agents that can handle real-world phone calls.</strong>
   <br />
   <br />
-  <a href="#-getting-started-in-under-5-minutes"><strong>🚀 Get Started</strong></a>
+<!--   <a href="#-getting-started-in-under-5-minutes"><strong>🚀 Get Started</strong></a> -->
   ·
   <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/issues"><strong>🐛 Report a Bug</strong></a>
   ·
@@ -156,62 +156,8 @@ No complex setup, no dependency hell. Just Docker and Git.
 
 ## 💖 We Need You! How to Contribute to Voice Marketing Agents
 
-**This is more than just a project; it's a community.** We believe in the power of open-source to build amazing things, and we welcome contributions of all kinds. Whether you're fixing a typo, adding a feature, or improving the docs, your help is what will make this project thrive.
-
-### Guiding Philosophy
-1.  **Open & Transparent:** All work happens in the open. We discuss features and bugs in GitHub Issues.
-2.  **Developer-First:** We strive to make the codebase clean, modern, and easy to understand.
-3.  **Community-Driven:** The best ideas can come from anywhere. We listen to all suggestions and value every contributor.
-
-### Types of Contributions We're Looking For
-*   **💻 Code Contributions:** Help us build new features from our [Roadmap](#-the-roadmap-from-awesome-to-unstoppable), fix bugs, or refactor code to be more efficient.
-*   **🎨 UI/UX Improvements:** Have an eye for design? Help us make the frontend dashboard more intuitive and beautiful.
-*   **✍️ Documentation:** Good docs are crucial! Help us improve this README, add tutorials, or clarify technical details.
-*   **🐞 Bug Reports:** Find a problem? A well-documented bug report is an invaluable contribution.
-*   **💡 Feature Ideas:** Have a great idea for a new feature? Open an issue and let's discuss it!
-
-### Your First Contribution: The Workflow
-
-Ready to jump in? Here’s how to submit a code contribution.
-
-1.  **Find an Issue:**
-    *   Start by looking at our [open issues](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues). Look for ones tagged `good first issue` - these are perfect for new contributors.
-    *   If you have a new idea, **create a new issue first** to discuss it with the maintainers. This ensures your hard work aligns with the project's goals.
-    *   **Claim an issue** by commenting on it, so everyone knows you're working on it.
-
-2.  **Fork & Branch:**
-    *   **Fork** the repository to your own GitHub account.
-    *   **Clone** your fork to your local machine:
-        ```sh
-        git clone https://github.com/OpenVoiceX/voice-marketing-agent.git
-        cd voice-marketing-agent
-        ```
-    *   Create a **new branch** for your feature or bug fix. Use a descriptive name:
-        ```sh
-        # For a feature:
-        git checkout -b feature/add-campaign-management
-        # For a bug fix:
-        git checkout -b fix/fix-agent-creation-bug
-        ```
-
-3.  **Make Your Changes:**
-    *   Now, write your code! Make sure to follow the existing coding style.
-    *   As you work, run the application locally using `docker compose up -d` to test your changes.
-    *   Commit your changes with clear, descriptive messages. A good commit message explains *what* you changed and *why*.
-
-4.  **Submit a Pull Request (PR):**
-    *   Push your branch to your fork on GitHub:
-        ```sh
-        git push origin feature/add-campaign-management
-        ```
-    *   Go to the original `voice-marketing-agent` repository on GitHub. You'll see a prompt to create a Pull Request from your new branch.
-    *   **Create the Pull Request.** Fill out the PR template. Be sure to link the issue it resolves (e.g., "Closes #123"). This helps us track everything.
-
-5.  **Code Review:**
-    *   A project maintainer will review your code. We might ask for changes or have a discussion in the PR comments. This is a normal and healthy part of the open-source process!
-    *   Once your PR is approved, it will be merged into the main branch.
-
-**Congratulations! 🎉 You've just made a valuable contribution to open-source!**
+Thanks for  showing the insterest , we are open and love the contributions .for a quick start dive into the [open Issues](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues).
+we encourage you to see [Contribution Guide](CONTRIBUTING.md) before geting started.
 
 ---
 
@@ -233,130 +179,29 @@ This project is a solid foundation, but our vision is much bigger. Here’s a sn
     *   **Comprehensive Analytics Dashboard:** Visualize call success rates, conversation paths, and more.
        
 
-# 💖 Contributing to Voice Marketing Agents
+## 🌟 Contributors
 
-First off, thank you for considering contributing! It’s people like you that make open-source such an amazing place. We are thrilled you're here.
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-This project is community-driven, and we welcome contributions of all kinds: from code and documentation to bug reports and feature ideas. No contribution is too small.
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-end -->
 
-## 🚀 You Can Make Your First Contribution in 5 Minutes!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-Seriously. We believe that contributing to open source should be easy and rewarding. Here’s how you can make your first pull request (PR) right now and officially become a contributor.
+### 🚀 How to Add Contributors
 
-1.  **Find your favorite emoji!** 😄
-2.  Go to our [`README.md` file](https://github.com/Hiteshydv001/Voice-Marketing-Agent/blob/main/README.md).
-3.  Click the little **pencil icon** to edit the file directly on GitHub.
-4.  Scroll to the bottom of the file to the "Contributors" section.
-5.  Add your name and GitHub profile link to the list, along with your chosen emoji. Like this:
-    ```markdown
-    - [Your Name](https://github.com/your-username) ✨
-    ```
-6.  Scroll up and click the **"Commit changes"** button. Give your commit a nice message like "feat: Add myself to contributors list".
-7.  Follow the prompts to create a new pull request.
-
-**That's it!** We'll merge it, and you'll be on our contributors' list. Welcome to the team!
-
----
-
-## 🛠️ How to Contribute Code (The Full Workflow)
-
-Ready to tackle a bug or build a new feature? Here’s the complete guide to setting up your environment and submitting your work.
-
-### Step 0: Find Something to Work On
-
-*   **Issues List:** Our project's to-do list lives in the [**Issues Tab**](https://github.com/OpenVoiceX/Voice-Marketing-Agent/issues). This is the best place to start.
-*   **Good First Issues:** We've tagged certain issues with the [`good first issue`](https://github.com/OpenVoiceX/Voice-Marketing-Agent/labels/good%20first%20issue) label. These are perfect for getting your feet wet with the codebase.
-*   **Claim an Issue:** To avoid duplicated effort, please comment on an issue to let us know you're working on it.
-*   **Have a New Idea?** Please **create a new issue** to discuss your idea before you start coding. This helps ensure your contribution aligns with the project's goals.
-
-### Step 1: Set Up Your Local Development Environment
-
-We've made this as simple as possible using Docker. You don't need to install Python, Node, or PostgreSQL on your machine. Just Docker.
-
-#### Prerequisites
-
-1.  **Git:** [Install Git](https://git-scm.com/)
-2.  **Docker & Docker Compose:** [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)
-
-#### Local Setup Commands
-
-1.  **Fork the repository:**
-    Click the "Fork" button at the top-right of the repository page. This creates a copy of the project under your own GitHub account.
-
-2.  **Clone your fork:**
-    ```sh
-    git clone https://github.com/YOUR_USERNAME/Voice-Marketing-Agent.git
-    cd Voice-Marketing-Agent
-    ```
-    *(Replace `YOUR_USERNAME` with your GitHub username.)*
-
-3.  **Create a new branch:**
-    Always work on a new branch, never on `main`. Name it something descriptive.
-    ```sh
-    # For a new feature:
-    git checkout -b feature/add-call-analytics
-    # For a bug fix:
-    git checkout -b fix/resolve-tts-latency-bug
-    ```
-
-4.  **Launch the application:**
-    This one command builds and runs the entire multi-service application.
-    ```sh
-    docker compose up --build -d
-    ```
-    *   The `--build` flag tells Docker to rebuild the images if you've changed code (like `requirements.txt`).
-    *   The `-d` flag runs it in the background.
-
-5.  **Download the LLM (one-time setup):**
-    The language model needs to be pulled into the running Ollama container.
-    ```sh
-    # Get the exact container name by running 'docker ps'
-    docker exec -it voice-marketing-agent-ollama-1 ollama pull tinylama
-    ```
-
-6.  **Verify your setup:**
-    *   **Frontend:** `http://localhost:3000`
-    *   **Backend API Docs:** `http://localhost:8000/docs`
-
-    If both pages load, your environment is ready!
-
-### Step 2: Make Your Changes
-
-Now for the fun part!
-
-*   **Backend Code:** The backend code is located in the `backend/` directory. When you save a Python file, FastAPI's reloader will automatically restart the server inside the Docker container. You can watch the logs with `docker logs -f voice-marketing-agent-backend-1`.
-*   **Frontend Code:** The frontend code is in the `frontend/` directory. When you save a `.jsx` or `.css` file, Vite's Hot Module Replacement (HMR) will update the UI in your browser instantly.
-
-### Step 3: Submit Your Pull Request
-
-Once you're happy with your changes:
-
-1.  **Commit your work:**
-    Use clear and descriptive commit messages.
-    ```sh
-    git add .
-    git commit -m "feat: Implement user authentication API endpoints"
-    ```
-
-2.  **Push to your fork:**
-    ```sh
-    git push origin your-branch-name
-    ```
-
-3.  **Open a Pull Request:**
-    Go to the original repository on GitHub. You'll see a banner prompting you to create a Pull Request from your new branch. Click it!
-
-4.  **Describe your PR:**
-    Fill out the Pull Request template. Explain **what** your PR does and **why** you made these changes. Link the issue it solves by writing "Closes #123" in the description.
-
-### Step 4: Code Review
-
-A maintainer will review your PR. We might suggest some changes or ask questions. This is a collaborative process to ensure the code quality remains high. Once approved, we will merge your code into the main branch.
-
-**🎉 Congratulations and thank you! You are officially a contributor to Voice Marketing Agents!**
-
----
-
+**For maintainers:** Comment on any issue or PR:
+```
+@all-contributors please add @username for code, docs, design
+```
+**For Contributers:** Comment on anny issue or PR:
+```
+@all-contributors please add me
+```
+the bot will automatically generate a pull request thet will be reviewd by our maintainers and after careful considerations you will be added . that's it👌
 ## 📜 Code of Conduct
 
 To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.** Please read the full [Code of Conduct](https://github.com/OpenVoiceX/Voice-Marketing-Agent?tab=coc-ov-file) before participating.
