@@ -191,6 +191,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
+Thanks to these wonderful people:
+
+<a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Hiteshydv001/Voice-Marketing-Agent" />
+</a>
+
+
 ### 🚀 How to Add Contributors
 
 **For maintainers:** Comment on any issue or PR:
