@@ -1,4 +1,8 @@
 {
+  "projectName": "Voice Marketing Agent",
+  "projectOwner": "Hitesh Yadav",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
@@ -6,23 +10,8 @@
   "commit": false,
   "commitConvention": "angular",
   "contributors": [
-    {
-      "login": "Hiteshydv001",
-      "name": "Hitesh",
-      "profile": "https://github.com/Hiteshydv001",
-      "contributions": [
-        "code",
-        "projectManagement",
-        "ideas",
-        "infra",
-        "doc"
-      ]
-    }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "projectName": "Voice-Marketing-Agent",
-  "projectOwner": "Hiteshydv001"
+  
 }
