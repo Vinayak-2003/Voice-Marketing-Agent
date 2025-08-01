@@ -186,17 +186,6 @@ This project is a solid foundation, but our vision is much bigger. Here’s a sn
        
 
 ## 🌟 Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-<!-- prettier-ignore-end -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
 Thanks to these wonderful people:
 
 <a href="https://github.com/Hiteshydv001/Voice-Marketing-Agent/graphs/contributors">
@@ -204,17 +193,6 @@ Thanks to these wonderful people:
 </a>
 
 
-### 🚀 How to Add Contributors
-
-**For maintainers:** Comment on any issue or PR:
-```
-@all-contributors please add @username for code, docs, design
-```
-**For Contributers:** Comment on anny issue or PR:
-```
-@all-contributors please add me
-```
-the bot will automatically generate a pull request thet will be reviewd by our maintainers and after careful considerations you will be added . that's it👌
 ## 📜 Code of Conduct
 
 To ensure a welcoming and inclusive environment, we have a Code of Conduct that all contributors are expected to follow. In short: **Be respectful, be kind, and be collaborative.** Please read the full [Code of Conduct](https://github.com/OpenVoiceX/Voice-Marketing-Agent?tab=coc-ov-file) before participating.
