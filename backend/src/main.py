@@ -5,8 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles # <-- Import StaticFiles
 from .core.config import settings # <-- Import settings
 from .models import campaign as campaign_model
-from .api.routes import agents, calls
-from .api.routes import campaigns as campaigns_router
+from .api.routes import agents, calls, campaigns as campaigns_router
 
 from .api.routes import agents, calls
 from .core.database import engine
@@ -38,11 +37,6 @@ app.add_middleware(
 app.include_router(agents.router, prefix="/api/v1/agents", tags=["Agents"])
 app.include_router(calls.router, prefix="/api/v1/calls", tags=["Calls"])
 app.include_router(campaigns_router.router, prefix="/api/v1/campaigns", tags=["Campaigns"]) 
-
-# Create database tables
-agent_model.Base.metadata.create_all(bind=engine)
-call_model.Base.metadata.create_all(bind=engine)
-campaign_model.Base.metadata.create_all(bind=engine) 
 
 
 @app.get("/", tags=["Health Check"])

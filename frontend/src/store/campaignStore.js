@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import * as campaignApi from '../services/campaignApi';
 
-const useCampaignStore = create((set) => ({
+const useCampaignStore = create((set, get) => ({
   campaigns: [],
   currentCampaign: null,
   loading: false,
@@ -33,14 +33,24 @@ const useCampaignStore = create((set) => ({
     try {
       await campaignApi.createCampaign(campaignData);
       // After creating, refetch the list to show the new campaign
-      const response = await campaignApi.getCampaigns();
-      set({ campaigns: response.data, loading: false });
+      await get().fetchCampaigns();
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
 
-  // Add more actions for start/stop/addContacts later
+  // --- NEW: Delete Campaign Action ---
+  deleteCampaign: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      await campaignApi.deleteCampaign(id);
+      // After deleting, refetch the list to update the UI
+      await get().fetchCampaigns();
+    } catch (error) {
+      set({ error: error.message, loading: false });
+    }
+  },
+  // ----------------------------------
 }));
 
 export default useCampaignStore;

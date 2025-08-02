@@ -14,6 +14,13 @@ const CampaignsPage = () => {
     fetchCampaigns();
   }, [fetchCampaigns]);
 
+  // Debug: Log campaigns to see what IDs exist
+  useEffect(() => {
+    if (campaigns.length > 0) {
+      console.log('Available campaigns:', campaigns.map(c => ({ id: c.id, name: c.name })));
+    }
+  }, [campaigns]);
+
   return (
     <div>
       <div className="page-header">
