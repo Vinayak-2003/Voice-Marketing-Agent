@@ -8,6 +8,7 @@ import './assets/index.css'
 import DashboardPage from './pages/DashboardPage.jsx'
 import AgentsPage from './pages/AgentsPage.jsx'
 import AgentDetailPage from './pages/AgentDetailPage.jsx'
+import CampaignsPage from './pages/CampaignsPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        index: true, // This makes it the default child route
+        index: true,
         element: <DashboardPage />,
       },
       {
@@ -23,8 +24,8 @@ const router = createBrowserRouter([
         element: <AgentsPage />,
       },
       {
-        path: "agents/:agentId",
-        element: <AgentDetailPage />,
+        path: "campaigns", // <-- ADD THIS NEW ROUTE
+        element: <CampaignsPage />,
       },
     ],
   },
