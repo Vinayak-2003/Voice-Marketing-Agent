@@ -12,7 +12,7 @@ psycopg2-binary
 # AI Service Libraries
 ollama
 faster-whisper
-TTS
+gTTS
 
 # Telephony
 twilio
